@@ -1,0 +1,1052 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta name="viewport">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>The Malevolent Seven</title>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="icon" href="asset/img/icon.ico" type="image/ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+    <script src="js/jqueryrotate.js"></script>
+</head>
+<body>
+    <!--Menu Music - Lone Cowboy by EagleGuard-->
+    <!--Shop Music - Five Card Shuffle by Kevin MacLeod-->
+    <audio id="menu" loop allow="autoplay">
+        <source src="asset/mp3/bgm.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="wind" loop>
+        <source src="asset/mp3/ambience.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="bell">
+        <source src="asset/mp3/start.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="heartbeat">
+        <source src="asset/mp3/heartbeat.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="dead">
+        <source src="asset/mp3/dead.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="body">
+        <source src="asset/mp3/body.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="end">
+        <source src="asset/mp3/end.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="posterRip">
+        <source src="asset/mp3/poster.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="win">
+        <source src="asset/mp3/win.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="door">
+        <source src="asset/mp3/door.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="shop" loop>
+        <source src="asset/mp3/shop.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="death">
+        <source src="asset/mp3/death.mp3" type="audio/mpeg">
+    </audio>
+    <section id="mainScreen">
+        <div id="titleScreenShell">
+            <img id="titleScreen" alt="Title background" src="asset/img/ui/title.jpg">
+            <button class="menuButton" id="instructions">Instructions</button>
+            <button class="menuButton" id="play">Play</button>
+        </div>
+        <div id="instructionsShell">
+            <img id="instructionsScreen" alt="Instructions background" src="asset/img/ui/instructions.jpg">
+            <p id="instructionsText">During a quick draw duel, the player must rest their mouse on the cylinder to begin the duel. When the player hears a bell and sees a target appear, quickly click on the target to shoot the enemy while the enemy does the same. Clicking the bullseye deals 100 damage while clicking on the middle white ring deals 50 damage and the outer red ring deals 25 damage. The player only has six rounds in their revolver therefore, if the player has used all six rounds, the player cannot fire anymore. Whoever delivers 100 damage to their enemy wins to fight another day.</p>
+            <button id="backToMenu">Back to<br>Menu</button>
+        </div>
+        <div id="matchShell">
+            <img id="matchBackground" alt="Match Background" src="asset/img/bg/background1.jpg">
+
+            <img id="cylinder" alt="Cylinder" src="asset/img/ui/cylinder1.png">
+
+            <img id="player" alt="Player" src="asset/img/player/alive1.png">
+            <img id="enemy" alt="Enemy" src="asset/img/enemy1/alive1.png">
+
+            <div id="playerHealth"></div>
+            <h2 id="playerHealthNumber">100</h2>
+            <div id="enemyHealth"></div>
+            <h2 id="enemyHealthNumber">100</h2>
+
+            <h2 id="stage">READY</h2>
+
+            <img id="outer" src="asset/img/target/target1.png">
+            <img id="middle" src="asset/img/target/target2.png">
+            <img id="inner" src="asset/img/target/target3.png">
+
+            <div id="begin">
+                <img class="poster" src="asset/img/ui/poster.png">
+                <h2 id="wanted">WANTED</h2>
+                <h2 id="deadOrAlive">DEAD OR ALIVE</h2>
+                <img id="mugshot" src="asset/img/enemy1/wanted.png">
+                <h2 id="name">Greg 'the Bully' Graham</h2>
+                <h2 id="reward">REWARD OF<br>$100</h2>
+                <button class="posterButton" id="beginButton">Begin</button>
+            </div>
+
+            <div id="over">
+                <img class="poster" src="asset/img/ui/posterDeath.png">
+                <h2 id="gameOver">YOU ARE<br>DEAD!</h2>
+                <h2 id="score">Score: 0</h2>
+                <button class="posterButton" id="submitButton">Submit</button>
+                <button class="posterButton" id="retryButton">Retry</button>
+            </div>
+
+            <div id="finish">
+                <img class="poster" src="asset/img/ui/poster.png">
+                <h2 id="victory">VICTORY!</h2>
+                <h2 id="theScore">Score:</h2>
+                <h2 id="healthScore" class="scores">+ 0 Health Bonus</h2>
+                <h2 id="accuracyScore" class="scores">+ 0 Accuracy Bonus</h2>
+                <h2 id="speedScore" class="scores">+ 0 Speed Bonus</h2>
+                <hr id="scoreLine">
+                <h2 id="totalScore">Total: 0</h2>
+                <h2 id="theMoney">Money:</h2>
+                <h2 id="money">+ $150 Bounty</h2>
+                <button class="posterButton" id="finishButton">Next</button>
+            </div>
+
+            <img id="missed" alt="Missed" src="asset/img/ui/missed.png">
+            <img id="damage" alt="damage" src="asset/img/ui/damage.png">
+            <img id="block" alt="Block" src="asset/img/ui/missed.png">
+            <img id="flash" alt="flash" src="asset/img/ui/flash.png">
+        </div>
+        <div id="shopShell">
+            <img id="shopScreen" alt="Shop background" src="asset/img/shop/store.png">
+            <img id="shopKeeper" alt="Shop Keeper" src="asset/img/shop/shopKeeper.png">
+            <img id="board" alt="Shop Board" src="asset/img/shop/board.png">
+            <h2 id="howdy">Howdy stranger! Anything tickle your fancy?</h2>
+            <hr id="shopLine">
+            <img id="gun1" class="guns" src="asset/img/shop/gun1.png">
+            <img id="gun2" class="guns" src="asset/img/shop/gun2.png">
+            <img id="gun3" class="guns" src="asset/img/shop/gun3.png">
+            <img id="gun4" class="guns" src="asset/img/shop/gun4.png">
+            <h2 id="gunName"></h2>
+            <h2 id="gunPrice"></h2>
+            <h2 id="totalDollars">Money: $0</h2>
+            <button id="leave" class="posterButton">Leave</button>
+        </div>
+        <div id="endingShell">
+            <img id="endingScreen" alt="Ending background" src="asset/img/ui/ending.jpg">
+            <img id="result" alt="The Player" src="asset/img/ui/loser.png">
+            <div id="submitScore">
+                <h2 id="finalScore">Final Score:</h2>
+                <h2 id="finalScoreNumber">0</h2>
+                <input id="yourName" type="text" placeholder="Your Name">
+                <button type="button" id="sentButton" class="posterButton">Submit</button>
+            </div>
+            <div id="scoreBoard">
+                <h2 id="highScore">High Score:</h2>
+                <div id="list">
+                    <ul id="listNames">
+                    </ul>
+                    <ul id="listScores">
+                    </ul>
+                </div>
+                <button type="button" id="replyButton" class="posterButton">Replay</button>
+            </div>
+        </div>
+    </section>
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "YOUR API KEY",
+            authDomain: "YOUR AUTH DOMAIN",
+            databaseURL: "YOUR DATABASE URL",
+            projectId: "YOUR PROJECT ID",
+            storageBucket: "YOUR STORAGE BUCKET",
+            messagingSenderId: "YOUR MESSAGING SENDER ID"
+        };
+        firebase.initializeApp(config);
+
+        // Get a reference to the database service
+        var database = firebase.database();
+    </script>
+    <script>
+        
+        // varibles
+        var shots = 0;
+        var enemy = 1;
+
+        var score = 0;
+        var money = 0;
+
+        var accuracyScore = 0;
+
+        var speedScore = 0
+        var start;
+        var stop;
+
+        var enemyShots = 0
+
+        var enemyBehavior = [
+            //[misses, chance of missing, change of 25, change of 50, change of 100, min react time, max react time]
+            [2, 40, 100, 40, 0, 1000, 1100],
+            [1, 30, 100, 80, 0, 900, 1000],
+            [0, 0, 100, 100, 10, 800, 700],
+            [0, 0, 100, 100, 35, 800, 700],
+            [0, 0, 100, 100, 50, 850, 700],
+            [0, 0, 100, 100, 75, 850, 700],
+            [0, 0, 100, 100, 100, 850, 700],
+        ];
+
+
+        var cylinderPhases = ["asset/img/ui/cylinder1.png", "asset/img/ui/cylinder2.png", "asset/img/ui/cylinder3.png", "asset/img/ui/cylinder4.png", "asset/img/ui/cylinder5.png", "asset/img/ui/cylinder6.png", "asset/img/ui/cylinder7.png"];
+
+        var playerAlive = ["asset/img/player/alive1.png", "asset/img/player/alive2.png"];
+        var enemyAlive = ["asset/img/enemy" + enemy + "/alive1.png", "asset/img/enemy" + enemy + "/alive2.png"];
+
+        var enemyFireGun = "asset/img/enemy" + enemy + "/fire.png";
+
+        var playerDead = ["asset/img/player/shot.png", "asset/img/player/dead1.png", "asset/img/player/dead2.png"];
+        var enemyDead = ["asset/img/enemy" + enemy + "/shot.png", "asset/img/enemy" + enemy + "/dead1.png", "asset/img/enemy" + enemy + "/dead2.png"];
+
+        var enemyMugshot = "asset/img/enemy" + enemy + "/wanted.png";
+
+        var enemyNames = ["Greg 'the Bully' Graham", "Adam 'Poker Face' Albert", "Henry 'Con Artist' Herman", "Juan 'Noose' Javier", "Robb 'Smiley' Reynolds", "Tim 'Shotgun' Tillman", "Donald 'Money' Decker"]
+
+        var background = "asset/img/bg/background" + enemy + ".jpg"
+
+        var playerAnimation = 0;
+        var enemyAnimation = 1;
+
+        var playerHealth = 100;
+        var enemyHealth = 100;
+
+        var reward = [100, 200, 250, 300, 350, 400, 100000]
+
+        var gun = 1;
+
+        // player animation
+        var playerInterval = setInterval(function() {
+            $('#player').attr('src', playerAlive[playerAnimation]);
+            playerAnimation++;
+            if (playerAnimation == 2) {
+                playerAnimation = 0;
+            }
+        }, 2000);
+
+        //enemy animation
+        var enemyInterval = setInterval(function() {
+            $('#enemy').attr('src', enemyAlive[enemyAnimation]);
+            enemyAnimation++;
+            if (enemyAnimation == 2) {
+                enemyAnimation = 0;
+            }
+        }, 1750);
+
+        // missed sound effect
+        var shotMissed = new Audio("asset/mp3/miss.mp3");
+        shotMissed.preload = 'auto';
+        shotMissed.load();
+
+        // shot hit sound effect
+        var shotHit = new Audio("asset/mp3/hit.mp3");
+        shotHit.preload = 'auto';
+        shotHit.load();
+
+        // gun empty sound effect
+        var shotEmpty = new Audio("asset/mp3/empty.mp3");
+        shotEmpty.preload = 'auto';
+        shotEmpty.load();
+
+        // ready game
+        $(document).ready(function() {
+            $("#mainScreen").fadeIn(1000);
+            $("#menu").get(0).play();
+        });
+
+        // instructions button
+        $("#instructions").click(function() {
+            $("#titleScreenShell").hide();
+            $("#instructionsShell").fadeIn(300);
+            var click = shotHit.cloneNode();
+            click.play();
+        });
+
+        // back to menu button
+        $("#backToMenu").click(function() {
+            $("#instructionsShell").hide();
+            $("#titleScreenShell").fadeIn(300);
+            var click = shotHit.cloneNode();
+            click.play();
+        });
+
+        // play game button
+        $("#play").click(function() {
+            $("#titleScreenShell").hide();
+            $("#matchShell").fadeIn(300);
+            $("#menu").get(0).pause();
+            $("#wind").get(0).play();
+            var click = shotHit.cloneNode();
+            click.play();
+        });
+
+        // played missed
+        $("#missed").click(function() {
+            clearInterval(playerInterval);
+            $("#player").attr("src", "asset/img/player/fire.png");
+            if (shots < 6) {
+                $("#flash").show().fadeOut(100)
+                var click = shotMissed.cloneNode();
+                click.play();
+                shots++;
+                $("#cylinder").attr("src", cylinderPhases[shots]);
+                $("#cylinder").rotate({
+                    angle: 0,
+                    duration: 300,
+                    animateTo: 60
+                });
+                $("#mainScreen").effect("shake", {
+                    distance: 7
+                }, 150);
+            } else {
+                var click = shotEmpty.cloneNode();
+                click.play();
+            }
+        });
+
+        // update enemy health
+        function changeHealth() {
+            var total = enemyHealth * 0.01 * 40;
+            var color;
+            if (enemyHealth === 100) {
+                color = "rgb(0,255,0)"
+            } else if (enemyHealth === 75) {
+                color = "rgb(255,255,0)"
+            } else if (enemyHealth === 50) {
+                color = "rgb(255,165,0)"
+            } else if (enemyHealth === 25) {
+                color = "rgb(255,0,0)"
+            } else if (enemyHealth === 0) {
+                color = "rgb(0,0,0)"
+            }
+            $("#enemyHealth").css("width", "" + total + "%").css("background", "" + color + "")
+            if (enemyHealth <= 0) {
+                var enemyHealthNumber = enemyHealth
+                enemyHealthNumber.length = 0
+                enemyHealthNumber = "DEAD"
+                $("#enemyHealthNumber").text(enemyHealthNumber)
+            } else {
+                $("#enemyHealthNumber").text(enemyHealth)
+            }
+        }
+
+        // update play health
+        function changePlayerHealth() {
+            var total = playerHealth * 0.01 * 40;
+            var color;
+            if (playerHealth === 100) {
+                color = "rgb(0,255,0)"
+            } else if (playerHealth === 75) {
+                color = "rgb(255,255,0)"
+            } else if (playerHealth === 50) {
+                color = "rgb(255,165,0)"
+            } else if (playerHealth === 25) {
+                color = "rgb(255,0,0)"
+            } else if (playerHealth === 0) {
+                color = "rgb(0,0,0)"
+            }
+            $("#playerHealth").css("width", "" + total + "%").css("background", "" + color + "")
+            if (playerHealth <= 0) {
+                var playerHealthNumber = playerHealth
+                playerHealthNumber.length = 0
+                playerHealthNumber = "DEAD"
+                $("#playerHealthNumber").text(playerHealthNumber)
+            } else {
+                $("#playerHealthNumber").text(playerHealth)
+            }
+        }
+
+        // check if enemy is dead
+        function checkEnemyDead() {
+            if (enemyHealth <= 0) {
+                stop = new Date();
+                var fakeSpeedScore = stop.getTime() - start.getTime();
+                speedScore = speedScore + Math.floor(((1750 - Math.floor(fakeSpeedScore)) / 10));
+                if (speedScore < 0) {
+                    speedScore = speedScore - speedScore;
+                } else if (speedScore > 0) {
+                    speedScore = speedScore - speedScore + 100;
+                }
+                start.length = 0;
+                stop.length = 0;
+                clearInterval(enemyInterval);
+                clearTimeout(startEnemyAttack);
+                $("#block").show();
+                $("#missed").hide();
+                $("#outer").hide();
+                $("#middle").hide();
+                $("#inner").hide();
+
+                function action1() {
+                    $("#enemy").attr("src", enemyDead[0]);
+                    var dead = document.getElementById('dead');
+                    dead.currentTime = 0;
+                    dead.play();
+                }
+
+                function action2() {
+                    if (enemy === 7) {
+                        $("#flash").show().fadeOut(100)
+                        var click = shotHit.cloneNode();
+                        click.play();
+                        $("#enemy").attr("src", enemyDead[1]);
+                        var dead = document.getElementById('dead');
+                        dead.currentTime = 0;
+                        dead.play();
+                    } else {
+                        $("#enemy").attr("src", enemyDead[1]);
+                        var body = document.getElementById('body');
+                        body.currentTime = 0;
+                        body.play();
+                    }
+                }
+
+                function action3() {
+                    $("#enemy").attr("src", enemyDead[2]);
+                    var end = document.getElementById('end');
+                    end.currentTime = 0;
+                    end.play();
+                }
+
+                function action4() {
+                    $("#healthScore").text("+ " + playerHealth + " Health Bonus");
+                    var realAccuracyScore = Math.floor(accuracyScore);
+                    $("#accuracyScore").text("+ " + realAccuracyScore + " Accuracy Bonus");
+                    $("#speedScore").text("+ " + speedScore + " Speed Bonus");
+                    score = score + playerHealth + realAccuracyScore + speedScore;
+                    $("#totalScore").text("Total: " + score + "");
+                    accuracyScore.length = 0;
+                    accuracyScore = 0;
+                    speedScore.length = 0;
+                    speedScore = 0;
+                    $("#money").text("+ $" + reward[enemy - 1] + " Bounty")
+                    $("#finish").show();
+                    var win = document.getElementById('win');
+                    win.currentTime = 0;
+                    win.play();
+                }
+
+                setTimeout(action1, 0)
+                setTimeout(action2, 1500)
+                setTimeout(action3, 3000)
+                setTimeout(action4, 5000)
+            }
+        }
+
+        // check if player is dead
+        function checkPlayerDead() {
+            if (playerHealth <= 0) {
+                clearInterval(playerInterval);
+                $("#block").show();
+                $("#missed").hide();
+                $("#outer").hide();
+                $("#middle").hide();
+                $("#inner").hide();
+
+                function action1() {
+                    $("#player").attr("src", playerDead[0]);
+                    var dead = document.getElementById('dead');
+                    dead.currentTime = 0;
+                    dead.play();
+                }
+
+                function action2() {
+                    $("#player").attr("src", playerDead[1]);
+                    var body = document.getElementById('body');
+                    body.currentTime = 0;
+                    body.play();
+                }
+
+                function action3() {
+                    $("#player").attr("src", playerDead[2]);
+                    var end = document.getElementById('end');
+                    end.currentTime = 0;
+                    end.play();
+                }
+
+                function action4() {
+                    $("#score").text("Score: " + score + "");
+                    $("#over").show();
+                    accuracyScore.length = 0;
+                    accuracyScore = 0;
+                    var death = document.getElementById('death');
+                    death.currentTime = 0;
+                    death.play();
+                }
+
+                setTimeout(action1, 0)
+                setTimeout(action2, 1500)
+                setTimeout(action3, 3000)
+                setTimeout(action4, 5000)
+            }
+        }
+
+        // holster sound effect
+        var holster = new Audio("asset/mp3/holster.mp3");
+        holster.preload = 'auto';
+        holster.load();
+
+        // start duel countdown function
+        var start;
+        var go = false;
+        $("#cylinder").hover(function() {
+            $("#stage").text("SET")
+            var getReady = holster.cloneNode();
+            getReady.play();
+            $("#heartbeat").get(0).play();
+            start = setTimeout(startDuel, Math.floor(Math.random() * ((7000 - 4000) + 1) + 4000))
+        }, function() {
+            clearTimeout(start);
+            if (go === false) {
+                $("#stage").text("READY")
+                $("#heartbeat").get(0).pause();
+                var heartbeat = document.getElementById('heartbeat');
+                heartbeat.currentTime = 0;
+            } else {}
+
+        });
+
+        // start duel function
+        function startDuel() {
+            go = true;
+            $("#heartbeat").get(0).pause();
+            var heartbeat = document.getElementById('heartbeat');
+            heartbeat.currentTime = 0;
+            $("#bell").get(0).play();
+            $("#stage").text("DRAW");
+            $("#missed").show()
+            spawnTargets();
+            enemyAttack()
+            start = new Date();
+        }
+
+        // spawn targets
+        function spawnTargets() {
+            var left = Math.floor(Math.random() * ((45 - 25) + 1) + 25);
+            var top = Math.floor(Math.random() * ((35 - 5) + 1) + 5);
+
+            $("#outer").css("width", "" + 6 * gun + "vw").css("margin-left", "" + left + "vw").css("margin-top", "" + top + "vw").show();
+
+            $("#middle").css("width", "" + 4 * gun + "vw").css("margin-left", "" + (left + gun) + "vw").css("margin-top", "" + (top + gun) + "vw").show();
+
+            $("#inner").css("width", "" + 2 * gun + "vw").css("margin-left", "" + (left + (gun * 2)) + "vw").css("margin-top", "" + (top + (gun * 2)) + "vw").show();
+        }
+
+        // enemy attack back after countdown
+        var startEnemyAttack;
+        function enemyAttack() {
+            var currentEnemy = enemy - 1;
+            var random = Math.floor((Math.random() * 100) + 1);
+
+            function attack() {
+                clearInterval(enemyInterval);
+                $("#enemy").attr("src", enemyFireGun);
+                if (enemyBehavior[currentEnemy][0] > 0) {
+                    if (enemyBehavior[currentEnemy][1] >= random) {
+                        $("#flash").show().fadeOut(100)
+                        var click = shotMissed.cloneNode();
+                        click.play();
+                        enemyShots++;
+                        enemyBehavior[currentEnemy][0] = enemyBehavior[currentEnemy][0] - 1;
+                        enemyAttack();
+                        return;
+                    } else {
+                        playerHealth = playerHealth - 25
+                        $("#damage").show().fadeOut(100);
+                        var click = shotHit.cloneNode();
+                        click.play();
+                        changePlayerHealth();
+                        enemyShots++;
+                        checkPlayerDead()
+                        enemyAttack();
+                        return;
+                    }
+                } else if (enemyBehavior[currentEnemy][4] >= random) {
+                    playerHealth = playerHealth - 100
+                    $("#damage").show().fadeOut(100);
+                    var click = shotHit.cloneNode();
+                    click.play();
+                    changePlayerHealth();
+                    enemyShots++;
+                    checkPlayerDead()
+                    enemyAttack();
+                } else if (enemyBehavior[currentEnemy][3] >= random) {
+                    playerHealth = playerHealth - 50
+                    $("#damage").show().fadeOut(100);
+                    var click = shotHit.cloneNode();
+                    click.play();
+                    changePlayerHealth();
+                    enemyShots++;
+                    checkPlayerDead()
+                    enemyAttack();
+                } else {
+                    playerHealth = playerHealth - 25
+                    $("#damage").show().fadeOut(100);
+                    var click = shotHit.cloneNode();
+                    click.play();
+                    changePlayerHealth();
+                    enemyShots++;
+                    checkPlayerDead()
+                    enemyAttack();
+                }
+            }
+
+            if (enemyShots < 6 && playerHealth > 0 && enemyHealth > 0) {
+                startEnemyAttack = setTimeout(attack, Math.floor(Math.random() * ((enemyBehavior[currentEnemy][6] - enemyBehavior[currentEnemy][5]) + 1) + enemyBehavior[currentEnemy][5]))
+            } else {}
+
+        }
+
+        // player hit bullseye
+        $("#inner").click(function() {
+            clearInterval(playerInterval);
+            $("#player").attr("src", "asset/img/player/fire.png");
+            if (shots < 6) {
+                enemyHealth = enemyHealth - 100;
+                $("#flash").show().fadeOut(100)
+                var click = shotHit.cloneNode();
+                click.play();
+                shots++;
+                if (shots === 1) {
+                    accuracyScore = accuracyScore + 100;
+                } else {
+                    accuracyScore = accuracyScore + (100 / shots);
+                }
+                $("#cylinder").attr("src", cylinderPhases[shots]);
+                $("#cylinder").rotate({
+                    angle: 0,
+                    duration: 300,
+                    animateTo: 60
+                });
+                $("#mainScreen").effect("shake", {
+                    distance: 7
+                }, 150);
+            } else {
+                var click = shotEmpty.cloneNode();
+                click.play();
+            }
+            changeHealth()
+            checkEnemyDead()
+        });
+
+        // play hit middle target
+        $("#middle").click(function() {
+            clearInterval(playerInterval);
+            $("#player").attr("src", "asset/img/player/fire.png");
+            if (shots < 6) {
+                enemyHealth = enemyHealth - 50;
+                $("#flash").show().fadeOut(100)
+                var click = shotHit.cloneNode();
+                click.play();
+                shots++;
+                if (shots === 1) {
+                    accuracyScore = accuracyScore + 50;
+                } else {
+                    accuracyScore = accuracyScore + (50 / shots);
+                }
+                $("#cylinder").attr("src", cylinderPhases[shots]);
+                $("#cylinder").rotate({
+                    angle: 0,
+                    duration: 300,
+                    animateTo: 60
+                });
+                $("#mainScreen").effect("shake", {
+                    distance: 7
+                }, 150);
+                spawnTargets()
+            } else {
+                var click = shotEmpty.cloneNode();
+                click.play();
+            }
+            changeHealth()
+            checkEnemyDead()
+        });
+
+        // player hit outer target
+        $("#outer").click(function() {
+            clearInterval(playerInterval);
+            $("#player").attr("src", "asset/img/player/fire.png");
+            if (shots < 6) {
+                enemyHealth = enemyHealth - 25;
+                $("#flash").show().fadeOut(100)
+                var click = shotHit.cloneNode();
+                click.play();
+                shots++;
+                if (shots === 1) {
+                    accuracyScore = accuracyScore + 25;
+                } else {
+                    accuracyScore = accuracyScore + (25 / shots);
+                }
+                $("#cylinder").attr("src", cylinderPhases[shots]);
+                $("#cylinder").rotate({
+                    angle: 0,
+                    duration: 300,
+                    animateTo: 60
+                });
+                $("#mainScreen").effect("shake", {
+                    distance: 7
+                }, 150);
+                spawnTargets()
+            } else {
+                var click = shotEmpty.cloneNode();
+                click.play();
+            }
+            changeHealth()
+            checkEnemyDead()
+        });
+
+        // begin duel button
+        $("#beginButton").click(function() {
+            var poster = document.getElementById('posterRip');
+            poster.currentTime = 0;
+            poster.play();
+            $("#block").hide();
+            $("#begin").hide();
+        });
+
+        // error sound effect
+        var cannotBuy = new Audio("asset/mp3/error.mp3");
+        cannotBuy.preload = 'auto';
+        cannotBuy.load();
+
+        // coin sound effect
+        var canBuy = new Audio("asset/mp3/buy.mp3");
+        canBuy.preload = 'auto';
+        canBuy.load();
+
+        // gun 1 hover effects
+        $("#gun1").hover(
+            function() {
+                $("#gunName").html("Colt Walker<br>Accuracy + 1");
+                $("#gunPrice").text("Cost $150");
+            },
+            function() {
+                $("#gunName").text("");
+                $("#gunPrice").text("");
+            }
+        );
+
+        // gun 1 click functions
+        $("#gun1").click(function() {
+            if (money >= 150) {
+                money = money - 150
+                $("#totalDollars").text("Money: $" + money + "")
+                var click = canBuy.cloneNode();
+                gun.length = 0
+                gun = 1.25;
+                click.play();
+                $(this).hide();
+            } else {
+                var click = cannotBuy.cloneNode();
+                click.play();
+            }
+        });
+
+        // gun 2 hover effects
+        $("#gun2").hover(
+            function() {
+                $("#gunName").html("Cooper Pocket Double Action<br>Accuracy + 2");
+                $("#gunPrice").text("Cost $400");
+            },
+            function() {
+                $("#gunName").text("");
+                $("#gunPrice").text("");
+            }
+        );
+
+        //gun 2 click functions
+        $("#gun2").click(function() {
+            if (money >= 400) {
+                money = money - 400
+                $("#totalDollars").text("Money: $" + money + "")
+                var click = canBuy.cloneNode();
+                gun.length = 0
+                gun = 1.5;
+                click.play();
+                $("#gun1").hide();
+                $(this).hide();
+            } else {
+                var click = cannotBuy.cloneNode();
+                click.play();
+            }
+        });
+
+        // gun 3 hover effects
+        $("#gun3").hover(
+            function() {
+                $("#gunName").html("Smith & Wesson Model 3<br>Accuracy + 3");
+                $("#gunPrice").text("Cost $750");
+            },
+            function() {
+                $("#gunName").text("");
+                $("#gunPrice").text("");
+            }
+        );
+
+        // gun 3 click effects
+        $("#gun3").click(function() {
+            if (money >= 750) {
+                money = money - 750
+                $("#totalDollars").text("Money: $" + money + "")
+                var click = canBuy.cloneNode();
+                gun.length = 0
+                gun = 1.75;
+                click.play();
+                $("#gun1").hide();
+                $("#gun2").hide();
+                $(this).hide();
+            } else {
+                var click = cannotBuy.cloneNode();
+                click.play();
+            }
+        });
+
+        // gun 4 hover effects
+        $("#gun4").hover(
+            function() {
+                $("#gunName").html("Colt Single Action Army<br>Accuracy + 4");
+                $("#gunPrice").text("Cost $1000");
+            },
+            function() {
+                $("#gunName").text("");
+                $("#gunPrice").text("");
+            }
+        );
+
+        // gun 4 click effects
+        $("#gun4").click(function() {
+            if (money >= 1000) {
+                money = money - 1000
+                $("#totalDollars").text("Money: $" + money + "")
+                var click = canBuy.cloneNode();
+                gun.length = 0
+                gun = 2;
+                click.play();
+                $("#gun1").hide();
+                $("#gun2").hide();
+                $("#gun3").hide();
+                $(this).hide();
+            } else {
+                var click = cannotBuy.cloneNode();
+                click.play();
+            }
+        });
+
+        // next duel and shop  button
+        $("#finishButton").click(function() {
+            if (enemy === 7) {
+                $("#wind").get(0).pause();
+                var bgm = document.getElementById('menu');
+                bgm.currentTime = 0;
+                bgm.play();
+                $("#matchShell").hide();
+                $("#result").attr("src", "asset/img/ui/winner.png");
+                $("#endingShell").fadeIn(300);
+                loadEnding();
+            } else {
+                $("#finish").hide();
+                money = money + reward[enemy - 1]
+                $("#matchShell").hide();
+                $("#shopShell").fadeIn(300);
+                $("#wind").get(0).pause();
+                var wind = document.getElementById('wind');
+                wind.currentTime = 0;
+                var door = document.getElementById('door');
+                door.currentTime = 0;
+                door.play();
+                var shop = document.getElementById('shop');
+                shop.currentTime = 0;
+                shop.play();
+                $("#totalDollars").text("Money: $" + money + "")
+                playerHealth.length = 0;
+                playerHealth = 100
+                enemyHealth.length = 0;
+                enemyHealth = 100;
+                changeHealth()
+                go = false;
+
+                changePlayerHealth()
+                shots = shots - shots;
+                enemyShots = enemyShots - enemyShots;
+                $("#cylinder").attr("src", cylinderPhases[shots]);
+                $("#cylinder").rotate({
+                    angle: 0,
+                    duration: 0,
+                    animateTo: 0
+                });
+
+                enemy++;
+                enemyAlive.length = 0;
+                enemyAlive = ["asset/img/enemy" + enemy + "/alive1.png", "asset/img/enemy" + enemy + "/alive2.png"];
+                enemyFireGun.length = 0;
+                enemyFireGun = "asset/img/enemy" + enemy + "/fire.png";
+                enemyDead.length = 0;
+                enemyDead = ["asset/img/enemy" + enemy + "/shot.png", "asset/img/enemy" + enemy + "/dead1.png", "asset/img/enemy" + enemy + "/dead2.png"];
+                enemyMugshot.length = 0;
+                enemyMugshot = "asset/img/enemy" + enemy + "/wanted.png";
+                background.length = 0;
+                background = "asset/img/bg/background" + enemy + ".jpg";
+
+                playerInterval.length = 0;
+                playerInterval = setInterval(function() {
+                    $('#player').attr('src', playerAlive[playerAnimation]);
+                    playerAnimation++;
+                    if (playerAnimation == 2) {
+                        playerAnimation = 0;
+                    }
+                }, 2000);
+
+                enemyInterval.length = 0;
+                enemyInterval = setInterval(function() {
+                    $('#enemy').attr('src', enemyAlive[enemyAnimation]);
+                    enemyAnimation++;
+                    if (enemyAnimation == 2) {
+                        enemyAnimation = 0;
+                    }
+                }, 1750);
+
+                $("#player").attr("src", playerAlive[0]);
+                $("#enemy").attr("src", enemyAlive[0]);
+                $("#matchBackground").attr("src", background);
+                $("#stage").text("READY");
+                $("#mugshot").attr('src', enemyMugshot);
+                $("#name").text(enemyNames[enemy - 1]);
+                $("#reward").html("REWARD OF<br>$" + reward[enemy - 1] + "");
+                $("#begin").show();
+            }
+        });
+
+        // leave shop and reset duel button
+        $("#leave").click(function() {
+            var shop = document.getElementById('shop');
+            shop.pause();
+            $("#wind").get(0).play();
+            var click = shotHit.cloneNode();
+
+            
+
+            $("#shopShell").hide();
+            $("#matchShell").fadeIn(300);
+        });
+
+        // retry duel button
+        $("#retryButton").click(function() {
+            var death = document.getElementById('death');
+            death.pause();
+            $("#over").hide();
+            playerHealth.length = 0;
+            playerHealth = 100
+            enemyHealth.length = 0;
+            enemyHealth = 100;
+            changeHealth()
+            go = false;
+
+            changePlayerHealth()
+            shots = shots - shots;
+            enemyShots = enemyShots - enemyShots;
+            $("#cylinder").attr("src", cylinderPhases[shots]);
+            $("#cylinder").rotate({
+                angle: 0,
+                duration: 0,
+                animateTo: 0
+            });
+
+            $("#player").attr("src", playerAlive[0]);
+            $("#enemy").attr("src", enemyAlive[0]);
+            $("#stage").text("READY");
+            $("#score").text("Score: " + score + "")
+            $("#begin").show();
+
+            playerInterval.length = 0;
+            playerInterval = setInterval(function() {
+                $('#player').attr('src', playerAlive[playerAnimation]);
+                playerAnimation++;
+                if (playerAnimation == 2) {
+                    playerAnimation = 0;
+                }
+            }, 2000);
+
+            enemyInterval.length = 0;
+            enemyInterval = setInterval(function() {
+                $('#enemy').attr('src', enemyAlive[enemyAnimation]);
+                enemyAnimation++;
+                if (enemyAnimation == 2) {
+                    enemyAnimation = 0;
+                }
+            }, 1750);
+        });
+
+        // go to the end and submit score button
+        $("#submitButton").click(function() {
+            $("#matchShell").hide();
+            $("#endingShell").show(300);
+            loadEnding();
+        });
+
+        // load ending function
+        function loadEnding() {
+            $("#finalScoreNumber").text(score);
+
+            function loadSubmit() {
+                $("#submitScore").fadeIn(500);
+
+            }
+            setTimeout(loadSubmit, 1500)
+        }
+
+        // sent score and name to firebase button
+        $("#sentButton").click(function() {
+            if ($("#yourName").val() === "") {
+                var click = cannotBuy.cloneNode();
+                click.play();
+            } else {
+                // strip tag
+                $("#yourName").val($("#yourName").val().replace(/<[^>]*>/g, ''));
+                // sent score and name to firebase 
+                var newClientKey = database.ref().child('plays').push().key;
+                database.ref('plays/' + newClientKey + '/name').set($("#yourName").val());
+                database.ref('plays/' + newClientKey + '/score').set(score);
+
+                // retrieve data from firebase
+                var playsRef = database.ref('plays');
+                playsRef.orderByChild("score").once('value', function(snapshot) {
+                    snapshot.forEach(function(childSnapshot) {
+                        var childData = childSnapshot.val();
+                        console.log(childData)
+                        $("#listNames").append("<li class='theNames'>" + childData.name + "</li>");
+                        $("#listScores").append("<li class='theScores'>" + childData.score + "</li>");
+                    });
+                });
+
+                // reverse lists
+                function reverse() {
+                    $('#listNames').append($('#listNames').find('li').get().reverse());
+                    $('#listScores').append($('#listScores').find('li').get().reverse());
+                }
+                setTimeout(reverse, 250);
+
+                $("#submitScore").hide();
+                $("#scoreBoard").fadeIn(300);
+            }
+        });
+
+        // replay the game button
+        $("#replyButton").click(function() {
+            location.reload();
+        });
+    </script>
+</body>
+
+</html>
