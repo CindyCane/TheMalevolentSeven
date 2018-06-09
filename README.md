@@ -11,3 +11,7 @@ During a quick draw duel, the player must rest their mouse on the cylinder to be
 Menu Music - Lone Cowboy by EagleGuard - https://www.newgrounds.com/audio/listen/285624
 
 Shop Music - Five Card Shuffle by Kevin MacLeod
+
+## The Site
+
+http://tianwd.com/cowboy/
