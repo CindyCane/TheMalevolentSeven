@@ -14,4 +14,4 @@ Shop Music - Five Card Shuffle by Kevin MacLeod
 
 ## The Site
 
-http://tianwd.com/cowboy/
+http://cowboy-game.surge.sh/
